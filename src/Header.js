@@ -7,14 +7,16 @@ import { useStateValue } from './StateProvider'
 import { auth } from "./Firebase"
 
 export default function Header() {
-    const [{basket}, user] = useStateValue()
+    const [{basket, user}] = useStateValue()
 
     const login = () => {
         if (user) {
         auth.signOut()
+        console.log("sign out")
     }
 }
 
+console.log(user)
     return (
   
         <nav className="header">
@@ -29,11 +31,12 @@ export default function Header() {
             <div className="header__nav">
                 <Link to={!user && "/login"} className="header__link">
                 <div onClick={login} className="header__option">
-                <span className="header__optionLineOne">Hello {user?.email}</span>
+                <span className="header__optionLineOne">Hello {user}</span>
                 <span className="header__optionLineTwo">{user ? "Sign out" : "Sign in"}</span>
                 </div>
                 </Link>
             </div>
+            
             <div className="header__nav">
                 <Link to="/login" className="header__link">
                 <div className="header__option">
